@@ -15,7 +15,7 @@ export APP_PID=$!
 while ! mongo --eval 'db.version()' > /dev/null 2>&1; do sleep 0.1; done
 
 # init replset with defaults
-mongo mongo/rocketchat --eval "rs.initiate({
+mongo localhost/rocketchat --eval "rs.initiate({
    _id: 'rs0',
    members: [ { _id: 0, host: '$host:27017' } ]
 })"
