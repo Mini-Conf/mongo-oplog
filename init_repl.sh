@@ -21,7 +21,7 @@ mongo mongo/rocketchat --eval "rs.initiate({
 })"
 
 # send stop signal to mongod
-kill -9 $APP_PID
+kill -2 $APP_PID
 # wait for mongod to be stopped
 while mongo --eval 'db.version()' > /dev/null 2>&1; do sleep 0.1; done
 
