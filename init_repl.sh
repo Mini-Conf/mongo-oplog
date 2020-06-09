@@ -8,7 +8,9 @@ fi
 host=${HOSTNAME:-$(hostname -f)}
 
 # start mongod for configuration
-mongod --replSet rs0 &
+mongod --replSet rs0  -smallfiles --oplogSize 128 --storageEngine=mmapv1 &
+export APP_PID=$!
+
 # wait for mongod to be started
 while ! mongo --eval 'db.version()' > /dev/null 2>&1; do sleep 0.1; done
 
@@ -19,7 +21,7 @@ mongo mongo/rocketchat --eval "rs.initiate({
 })"
 
 # send stop signal to mongod
-kill -2 %1
+kill -9 $APP_PID
 # wait for mongod to be stopped
 while mongo --eval 'db.version()' > /dev/null 2>&1; do sleep 0.1; done
 
