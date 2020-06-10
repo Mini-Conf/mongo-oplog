@@ -8,4 +8,4 @@ chown -R mongodb /data/db
 
 
 
-exec su -s /bin/sh -c "exec mongod -smallfiles --oplogSize 128 --storageEngine=mmapv1 --bind_ip_all --replSet rs0" mongodb 
+exec su -s /bin/sh -c "exec mongod -smallfiles --oplogSize 128 --storageEngine=wiredTiger --bind_ip_all --replSet rs0" mongodb 
