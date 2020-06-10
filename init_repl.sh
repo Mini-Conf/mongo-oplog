@@ -8,7 +8,7 @@ fi
 host=${HOSTNAME:-$(hostname -f)}
 
 # start mongod for configuration
-mongod --replSet rs0  -smallfiles --oplogSize 128 --storageEngine=mmapv1 &
+mongod --replSet rs0  -smallfiles --oplogSize 128 --storageEngine=wiredTiger &
 export APP_PID=$!
 
 # wait for mongod to be started
